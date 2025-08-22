@@ -26,49 +26,53 @@
 
 // BONUS 1
 
-async function getChefBirthday(id) {
-  let resolve;
-  try {
-    const responseFetch = await fetch(`https://dummyjson.com/recipes/${id}`);
+// Ho dovuto guardare il video per poterlo fare
 
-    resolve = await responseFetch.json();
+async function getChefBirthday(id) {
+  let recipe;
+  try {
+    const recipeResponse = await fetch(`https://dummyjson.com/recipes/${id}`);
+    recipe = await recipeResponse.json();
   } catch (error) {
     console.error(error);
     throw new Error(`Non recupero la ricetta con id= ${id}`);
   }
-  if (!resolve) {
-    throw new Error(`Ricetta con id= ${id} non trovata!`);
+  if (recipe.messagge) {
+    throw new Error(recipe.messagge);
   }
-  console.log(resolve);
-  const userId = resolve.userId;
+  // console.log(resolve);
+  // const userId = resolve.userId;
 
-  console.log(userId);
-  let resolveUser;
+  // console.log(userId);
+  let chef;
   try {
-    const responseFetchUser = await fetch(
-      `https://dummyjson.com/users/${userId}`
+    const chefResponse = await fetch(
+      `https://dummyjson.com/users/${recipe.userId}`
     );
-
-    resolveUser = await responseFetchUser.json();
+    chef = await chefResponse.json();
   } catch (error) {
     console.error(error);
     throw new Error(`Non recupero lo chef con id= ${id}`);
   }
-  if (!resolveUser) {
-    throw new Error(`Chef con id= ${id} non trovato!`);
+  if (chef.messagge) {
+    throw new Error(chef.messagge);
   }
-  console.log(resolveUser);
-  const birthday = resolveUser.birthDate;
-  console.log(birthday);
 
-  return birthday;
+  return chef.birthDate;
 }
 
-getChefBirthday(12345678910)
-  .then((birthday) => console.log(`La data di nascità dello chef è:`, birthday))
-  .catch((error) => console.error(`Errore.`, error.messagge));
+(async () => {
+  try {
+    const birthday = await getChefBirthday(1345187);
+    console.log(`La data di nascità dello chef è:`, birthday);
+  } catch (error) {
+    console.error(`Errore:`, error); // non funziona con error.messagge e compare questo: console.log(`La data di nascità dello chef è:`, birthday);
+  }
+})();
 
 // BONUS 2
+
+// Ho cercato online come fare per integrare la libreria ed utilizzarla
 
 // async function getChefBirthday(id) {
 //   let responseFetch;
