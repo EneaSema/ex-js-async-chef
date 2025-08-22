@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Il compleanno dello Chef</title>
+  </head>
+  <body>
+    <h1>Il compleanno dello Chef</h1>
+    <ul>
+      In questo esercizio, utilizzerai async/await per creare la funzione
+      getChefBirthday(id). Questa funzione accetta un id di una ricetta e deve:
+      <hr />
+      <li>Recuperare la ricetta da https://dummyjson.com/recipes/{id}</li>
+      <li>Estrarre la proprietà userId dalla ricetta</li>
+      <li>
+        Usare userId per ottenere le informazioni dello chef da
+        https://dummyjson.com/users/{userId}
+      </li>
+      <li>Restituire la data di nascita dello chef</li>
+    </ul>
+    <b><h2>Note del docente</h2></b>
+    <ul>
+      Scrivi la funzione getChefBirthday(id), che deve:
+      <li>Essere asincrona (async).</li>
+      <li>Utilizzare await per chiamare le API.</li>
+      <li>Restituire una Promise con la data di nascita dello chef.</li>
+      <li>Gestire gli errori con try/catch</li>
+    </ul>
+    <b><h3>Esempio di utilizzo</h3></b>
+    <p>
+      getChefBirthday(1) .then(birthday => console.log("Data di nascita dello
+      chef:", birthday)) .catch(error => console.error("Errore:",
+      error.message));
+    </p>
+    <b><h3>Esempio di output atteso</h3></b>
+    <p>Data di nascita dello chef: 1990-06-15</p>
+    <script src="snack4.js"></script>
+  </body>
+</html>
